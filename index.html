@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <nav class="navbar">
         <div class="logo">Sanket.dev</div>
@@ -34,17 +36,16 @@
             <h2 class="title">Full Stack Developer</h2>
             <p class="description">Building modern web experiences with passion and precision.</p>
             <div class="cta-buttons">
-                <a href="#projects" class="btn primary">View Work</a>
-                <a href="#contact" class="btn secondary">Contact Me</a>
+                <a href="sanket_pawar_resume.pdf" class="btn primary" download>Download Resume</a>
+                <a href="#" class="btn secondary open-modal-btn">Say Hello</a>
             </div>
             <div class="social-links">
                 <a href="https://github.com/sanketpawarr68-jpg" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/sanket-pawar-11859024a/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.linkedin.com/in/sanket-pawar-11859024a/" target="_blank"><i
+                        class="fab fa-linkedin"></i></a>
             </div>
         </div>
-        <div class="hero-visual">
-            <div class="blob"></div>
-        </div>
+        <div id="canvas-container"></div>
     </header>
 
     <section id="about" class="section">
@@ -52,7 +53,10 @@
             <h2 class="section-title">About Me</h2>
             <div class="about-content">
                 <div class="about-text">
-                    <p>I am a passionate developer focused on creating clean, elegant, and efficient solutions. With a strong foundation in modern web technologies, I enjoy turning complex problems into simple, beautiful, and intuitive designs. I am constantly learning and exploring new technologies to stay at the forefront of the industry.</p>
+                    <p>I am a passionate developer focused on creating clean, elegant, and efficient solutions. With a
+                        strong foundation in modern web technologies, I enjoy turning complex problems into simple,
+                        beautiful, and intuitive designs. I am constantly learning and exploring new technologies to
+                        stay at the forefront of the industry.</p>
                 </div>
             </div>
         </div>
@@ -105,7 +109,7 @@
                         <a href="#" class="project-link">View Project <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
-                 <!-- Project 2 Placeholder -->
+                <!-- Project 2 Placeholder -->
                 <div class="project-card">
                     <div class="project-info">
                         <h3>Resume Builder</h3>
@@ -117,7 +121,7 @@
                     </div>
                 </div>
                 <!-- Project 3 Placeholder -->
-                 <div class="project-card">
+                <div class="project-card">
                     <div class="project-info">
                         <h3>WhatsApp Clone</h3>
                         <p>A real-time messaging application with video call features.</p>
@@ -131,11 +135,48 @@
         </div>
     </section>
 
+    <section id="languages" class="section">
+        <div class="container">
+            <h2 class="section-title">Languages</h2>
+            <div class="languages-grid">
+                <div class="language-card">
+                    <h3>Marathi</h3>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 100%"><span>100%</span></div>
+                    </div>
+                </div>
+                <div class="language-card">
+                    <h3>Hindi</h3>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 100%"><span>100%</span></div>
+                    </div>
+                </div>
+                <div class="language-card">
+                    <h3>English</h3>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 90%"><span>90%</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="contact" class="section">
         <div class="container">
             <h2 class="section-title">Get In Touch</h2>
-            <p class="contact-text">I'm currently open to new opportunities. Whether you have a question or just want to say hi, I'll try my best to get back to you!</p>
-            <a href="mailto:contact@sanketpawar.dev" class="btn primary">Say Hello</a>
+            <p class="contact-text">I'm currently open to new opportunities. Whether you have a question or just want to
+                say hi, I'll try my best to get back to you!</p>
+            <a href="#" class="btn primary open-modal-btn">Say Hello</a>
+            <div class="contact-details">
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:sanketpawarr68@gmail.com">sanketpawarr68@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <a href="tel:+917823879053">+91 78238 79053</a>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -143,6 +184,33 @@
         <p>&copy; 2024 Sanket Pawar. All rights reserved.</p>
     </footer>
 
+    <!-- Three.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="script.js"></script>
-</body>
+
+    <!-- Contact Modal -->
+    <div id="contact-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Send Message</h2>
+            <form id="contact-form" action="https://formspree.io/f/xkovbrqn" method="POST">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn primary">Send Feedback</button>
+            </form>
+            <p class="form-note">Please replace <strong>YOUR_FORM_ID</strong> in the HTML with your actual Formspree ID.
+            </p>
+        </div>
+    </div>
+
 </html>
