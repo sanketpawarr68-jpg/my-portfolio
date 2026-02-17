@@ -1,0 +1,22 @@
+To run this project, you can use any of the following methods:
+
+Option 1: Using VS Code Live Server (Recommended)
+1. Install the "Live Server" extension in VS Code.
+2. Right-click on "index.html".
+3. Select "Open with Live Server".
+
+Option 2: Using Python (if installed)
+1. Open a terminal/command prompt in this folder.
+2. Run the command:
+   python -m http.server
+3. Open your browser and go to: http://localhost:8000
+
+Option 3: Using Node.js (if installed)
+1. Open a terminal/command prompt in this folder.
+2. Run the command:
+   npx serve .
+3. Open the link shown (usually http://localhost:3000)
+
+Option 4: Direct File Open
+1. Simply double-click "index.html" to open it in your browser.
+   (Note: Some 3D features or external assets might not load correctly due to browser security policies when using this method.)

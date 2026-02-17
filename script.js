@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, { threshold: 0.1 });
 
-    const hiddenElements = document.querySelectorAll('.skill-card, .project-card, .section-title, .language-card');
+    const hiddenElements = document.querySelectorAll('.skill-card, .project-card, .section-title, .language-card, .timeline-item, .badge-card, .resume-preview, .resume-info, .location-card, .about-stat-card, .about-text-column');
     hiddenElements.forEach((el) => {
         el.classList.add('hidden');
         observer.observe(el);
