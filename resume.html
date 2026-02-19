@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=210mm, initial-scale=1.0">
+    <title>Resume - Sanket Pawar</title>
+    <!-- Importing Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Montserrat:wght@400;500;600;700&family=Open+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <!-- html2pdf.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <style>
+        /* Base Styles */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: #2c3e50;
+            line-height: 1.6;
+            background-color: #555;
+            /* Dark background behind the paper */
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        /* Resume Container - The "Paper" */
+        .resume-container {
+            width: 210mm;
+            min-height: 297mm;
+            background-color: white;
+            padding: 15mm 15mm;
+            /* Balanced Padding */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        /* Essential for printing background colors/images */
+        * {
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
+
+        /* Download Button Styles */
+        .download-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #e74c3c;
+            /* Red for PDF */
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .download-btn:hover {
+            background-color: #c0392b;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Print Button Styles - Alternative */
+        .print-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 210px;
+            /* Spaced from download btn */
+            background-color: #2c3e50;
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .print-btn:hover {
+            background-color: #34495e;
+            transform: translateY(-2px);
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+                margin: 0;
+                display: block;
+            }
+
+            .resume-container {
+                width: 100%;
+                box-shadow: none;
+                padding: 15mm !important;
+                margin: 0;
+                min-height: auto;
+            }
+
+            .download-btn,
+            .print-btn {
+                display: none;
+            }
+
+            @page {
+                size: A4;
+                margin: 0mm;
+                /* Browser handles margins via padding in padding above */
+            }
+
+            /* Ensure page breaks don't cut content awkwardly */
+            .project-item,
+            .item-block,
+            h2.section-header {
+                break-inside: avoid;
+            }
+        }
+
+        /* Header */
+        header {
+            text-align: left;
+            margin-bottom: 25px;
+            border-bottom: 3px solid #2c3e50;
+            padding-bottom: 15px;
+        }
+
+        h1 {
+            font-family: 'Merriweather', serif;
+            font-size: 32px;
+            /* Slightly smaller for better fit */
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin: 0 0 10px 0;
+            color: #1a252f;
+        }
+
+        .contact-info {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 10px;
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Section Heading */
+        h2.section-header {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            background-color: #f4f6f8;
+            border-left: 6px solid #2c3e50;
+            padding: 8px 15px;
+            margin: 20px 0 12px 0;
+            letter-spacing: 1.2px;
+            color: #2c3e50;
+            /* Flex for better vertical alignment if needed */
+            display: flex;
+            align-items: center;
+        }
+
+        /* Content Styles */
+        .content-section {
+            margin-bottom: 10px;
+        }
+
+        .link-row {
+            margin-bottom: 4px;
+            font-size: 12px;
+        }
+
+        .link-label {
+            font-weight: 700;
+            margin-right: 5px;
+            font-family: 'Montserrat', sans-serif;
+            color: #2c3e50;
+        }
+
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        p {
+            margin: 0 0 10px 0;
+            font-size: 12px;
+            text-align: justify;
+            color: #333;
+            line-height: 1.7;
+        }
+
+        /* Education & Experience Items */
+        .item-block {
+            margin-bottom: 15px;
+            border-left: 3px solid #e0e0e0;
+            padding-left: 12px;
+        }
+
+        .date-badge {
+            background-color: #2c3e50;
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 9px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .item-title {
+            font-family: 'Merriweather', serif;
+            font-weight: 700;
+            font-size: 15px;
+            margin: 2px 0;
+            display: block;
+            color: #000;
+        }
+
+        .item-subtitle {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 12px;
+            color: #555;
+            font-weight: 600;
+            margin: 0;
+            display: block;
+        }
+
+        /* Skills */
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .skill-tag {
+            border: 1px solid #7f8c8d;
+            /* Slightly darker border for better visibility */
+            background-color: #fff;
+            padding: 5px 12px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 10px;
+            font-weight: 600;
+            color: #2c3e50;
+            border-radius: 50px;
+            /* Full pill shape */
+        }
+
+        /* Languages */
+        .language-item {
+            display: inline-block;
+            margin-right: 20px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+
+        .language-bars {
+            display: inline-block;
+            margin-left: 5px;
+        }
+
+        .bar {
+            width: 10px;
+            height: 10px;
+            background-color: #2c3e50;
+            display: inline-block;
+            margin-right: 2px;
+            border-radius: 50%;
+        }
+
+        .bar.inactive {
+            background-color: #bdc3c7;
+        }
+
+        /* Projects */
+        .project-item {
+            margin-bottom: 15px;
+        }
+
+        .project-title {
+            font-family: 'Merriweather', serif;
+            font-weight: 700;
+            font-size: 14px;
+            color: #2c3e50;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 2px;
+            margin-bottom: 4px;
+            display: inline-block;
+        }
+
+        .project-tech {
+            font-family: 'Open Sans', sans-serif;
+            font-style: italic;
+            font-size: 11px;
+            margin-bottom: 4px;
+            color: #666;
+        }
+
+        .project-tech strong {
+            font-family: 'Montserrat', sans-serif;
+            font-style: normal;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+
+        ul {
+            margin: 4px 0 8px 18px;
+            padding: 0;
+        }
+
+        li {
+            font-size: 12px;
+            color: #333;
+            margin-bottom: 3px;
+            padding-left: 4px;
+        }
+
+        li::marker {
+            color: #2c3e50;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Buttons -->
+    <button class="print-btn" onclick="window.print()">
+        <span>🖨️</span> Print Recommended
+    </button>
+    <button id="download-btn" class="download-btn">
+        <span>⬇</span> Download Image PDF
+    </button>
+
+    <div class="resume-container" id="resume-content">
+        <!-- Header -->
+        <header>
+            <h1>Sanket Pawar</h1>
+            <div class="contact-info">
+                <span>Shrigonda, India, Ghodegaon, 413701</span>
+                <span>+91 7823879053</span>
+                <span>sanketpawarr68@gmail.com</span>
+            </div>
+        </header>
+
+        <!-- Websites and Social Links -->
+        <h2 class="section-header">Websites and Social Links</h2>
+        <div class="content-section">
+            <div class="link-row"><span class="link-label">LinkedIn:</span> <a
+                    href="https://linkedin.com/in/sanket-pawar-11859024a"
+                    target="_blank">linkedin.com/in/sanket-pawar-11859024a</a></div>
+            <div class="link-row"><span class="link-label">Github:</span> <a
+                    href="https://github.com/sanketpawarr68-jpg" target="_blank">github.com/sanketpawarr68-jpg</a></div>
+            <div class="link-row"><span class="link-label">Portfolio:</span> <a
+                    href="https://sanketpawarr68-jpg.github.io/my-portfolio/"
+                    target="_blank">sanketpawarr68-jpg.github.io/my-portfolio/</a></div>
+        </div>
+
+        <!-- Summary -->
+        <h2 class="section-header">Summary</h2>
+        <div class="content-section">
+            <p>
+                Results-driven and cooperative team player with strong organizational and multitasking abilities,
+                capable of managing multiple academic and technical projects simultaneously while maintaining accuracy
+                and meeting deadlines. Adept at prioritizing tasks, streamlining workflows, and collaborating
+                effectively with peers and faculty to achieve project objectives. A technology-focused postgraduate
+                student currently pursuing a Master's degree in Computer Applications, with strong skills in
+                programming, problem-solving, database management, and web development. Knowledgeable in aligning
+                technical solutions with practical requirements to improve system efficiency and user experience.
+                Demonstrates the ability to manage projects from concept to completion, ensure quality outcomes, and
+                continuously enhance skills through hands-on learning and innovation. Seeking an opportunity to
+                contribute technical expertise and enthusiasm to a growth-oriented organization while further developing
+                professional competencies.
+            </p>
+        </div>
+
+        <!-- Education -->
+        <h2 class="section-header">Education</h2>
+        <div class="content-section">
+            <div class="item-block">
+                <span class="date-badge">2025 – 2027</span>
+                <span class="item-title">M.Sc Comp. Application</span>
+                <span class="item-subtitle">Abasaheb Garware College, Pune</span>
+            </div>
+
+            <div class="item-block">
+                <span class="date-badge">2022 – 2025</span>
+                <span class="item-title">B.Sc. Computer Science</span>
+                <span class="item-subtitle">Abasaheb Garware College, Pune, Maharashtra</span>
+            </div>
+
+            <div class="item-block">
+                <span class="date-badge">2020 – 2022</span>
+                <span class="item-title">12th – Science</span>
+                <span class="item-subtitle">Maharaja Jivajirao Shinde Mahavidyalay, Shrigonda, Maharashtra</span>
+            </div>
+
+            <div class="item-block">
+                <span class="date-badge">2019 – 2020</span>
+                <span class="item-title">10th – Semi-English</span>
+                <span class="item-subtitle">Sharda Vidya Niketan Shrigonda, Maharashtra</span>
+            </div>
+        </div>
+
+        <!-- Skills -->
+        <h2 class="section-header">Skills</h2>
+        <div class="content-section">
+            <div class="skills-grid">
+                <div class="skill-tag">Python</div>
+                <div class="skill-tag">JavaScript</div>
+                <div class="skill-tag">TypeScript</div>
+                <div class="skill-tag">C++</div>
+                <div class="skill-tag">C</div>
+                <div class="skill-tag">HTML5</div>
+                <div class="skill-tag">CSS3</div>
+                <div class="skill-tag">React.js</div>
+                <div class="skill-tag">Git</div>
+                <div class="skill-tag">GitHub</div>
+                <div class="skill-tag">Node.js</div>
+                <div class="skill-tag">Express.js</div>
+                <div class="skill-tag">MySQL</div>
+                <div class="skill-tag">MongoDB</div>
+            </div>
+        </div>
+
+        <!-- Languages -->
+        <h2 class="section-header">Languages</h2>
+        <div class="content-section">
+            <div class="language-item">
+                English
+                <div class="language-bars">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar inactive"></div>
+                </div>
+            </div>
+            <div class="language-item">
+                Marathi
+                <div class="language-bars">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+            </div>
+            <div class="language-item">
+                Hindi
+                <div class="language-bars">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar inactive"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Achievements -->
+        <h2 class="section-header">Achievements</h2>
+        <div class="content-section">
+            <ul>
+                <li>Certificate of Participation - CSA Interface 2025-26 (MES Abasaheb Garware College Pune)</li>
+                <li>Certificate for volunteering - Door step School Foundation</li>
+            </ul>
+        </div>
+
+        <!-- Projects -->
+        <h2 class="section-header">Projects</h2>
+        <div class="content-section">
+
+            <!-- Project 1 -->
+            <div class="project-item">
+                <div class="project-title">1. AI-Powered Career Development Platform (CareerForge AI)</div>
+                <br>
+                <div class="project-tech"><strong>Tech Stack:</strong> React 19, TypeScript, FastAPI (Python), MongoDB,
+                    OpenAI API, Google Gemini Pro, Clerk Auth.</div>
+                <ul>
+                    <li>Developed a comprehensive career platform featuring an AI-enhanced resume builder and
+                        intelligent mock interview simulator, serving over 1,200 active users.</li>
+                    <li>Integrated OpenAI & Google Gemini APIs to provide real-time resume scoring (ATS optimization),
+                        bullet point generation, and context-aware interview questions.</li>
+                    <li>Built a responsive frontend with optimal state management and a robust FastAPI backend handling
+                        asynchronous tasks and complex data processing.</li>
+                </ul>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="project-item">
+                <div class="project-title">2. Real-Time Paper Trading Simulation Platform</div>
+                <br>
+                <div class="project-tech"><strong>Tech Stack:</strong> React, Python (Flask), MongoDB, NSE Data
+                    Integration.</div>
+                <ul>
+                    <li>Engineered a full-stack stock trading simulator allowing users to practice trading strategies
+                        with virtual currency using real-world market constraints.</li>
+                    <li>Developed a RESTful Flask API to manage user portfolios, execute buy/sell orders, and track
+                        transaction history in a MongoDB database.</li>
+                    <li>Integrated live market data fetching (NSE Symbols) to simulate authentic price movements and
+                        calculated real-time profit/loss metrics.</li>
+                </ul>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="project-item">
+                <div class="project-title">3. Real-Time Chat & Video Calling Application (WhatsApp Clone)</div>
+                <br>
+                <div class="project-tech"><strong>Tech Stack:</strong> React, Node.js, Socket.io, PeerJS (WebRTC), Vite.
+                </div>
+                <ul>
+                    <li>Built a real-time communication application supporting instant messaging and low-latency
+                        audio/video calls tailored for seamless user interaction.</li>
+                    <li>Implemented WebRTC via PeerJS to establish peer-to-peer connections for high-quality video
+                        streaming without intermediate servers.</li>
+                    <li>Utilized Socket.io for bi-directional event-based communication to enable instant message
+                        delivery and online status updates.</li>
+                </ul>
+            </div>
+
+            <!-- Project 4 -->
+            <div class="project-item">
+                <div class="project-title">4. Smart Campus Vehicle Entry & Management System</div>
+                <br>
+                <div class="project-tech"><strong>Tech Stack:</strong> Node.js (Express), MongoDB (Mongoose), React,
+                    HTML/CSS.</div>
+                <ul>
+                    <li>Developed a vehicle tracking system for educational institutions to digitize entry/exit logs and
+                        enhance campus security.</li>
+                    <li>Built a centralized dashboard to monitor vehicle movements, manage authorized vehicle logs, and
+                        generate daily entry reports.</li>
+                    <li>Implemented a REST API with Express and MongoDB to efficiently store and retrieve vehicle
+                        records and driver information.</li>
+                </ul>
+            </div>
+
+            <!-- Project 5 -->
+            <div class="project-item">
+                <div class="project-title">5. Personal Developer Portfolio</div>
+                <br>
+                <div class="project-tech"><strong>Tech Stack:</strong> HTML5, CSS3, JavaScript.</div>
+                <ul>
+                    <li>Designed and deployed a responsive personal portfolio website showcasing projects, skills, and
+                        resume to prospective employers.</li>
+                    <li>Implemented modern UI/UX principles with smooth scrolling, mobile-first design, and interactive
+                        elements to enhance visitor engagement.</li>
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        document.getElementById('download-btn').addEventListener('click', function () {
+            const element = document.getElementById('resume-content');
+
+            // Wait for fonts to ensure they render
+            document.fonts.ready.then(() => {
+                const opt = {
+                    margin: 0, // Use browser margin management or specific PDF margin
+                    filename: 'Sanket_Pawar_Resume.pdf',
+                    image: { type: 'jpeg', quality: 1.0 },
+                    html2canvas: {
+                        scale: 3, // Higher scale for better definition
+                        useCORS: true,
+                        letterRendering: true,
+                        scrollY: 0
+                    },
+                    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                };
+
+                // Use html2pdf to download the content
+                html2pdf().set(opt).from(element).save();
+            });
+        });
+    </script>
+
+</body>
+
+</html>
