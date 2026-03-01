@@ -1,435 +1,735 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sanket Pawar | Portfolio</title>
+    <title>Sanket Pawar | Full Stack Developer</title>
+    <meta name="description"
+        content="Portfolio of Sanket Pawar - Full Stack Developer building modern web experiences.">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
-    <nav class="navbar">
-        <div class="logo">Sanket.dev</div>
-        <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#resume">Resume</a></li>
-            <li><a href="#contact">Contact</a></li>
+    <!-- Page Loader -->
+    <div id="loader" class="loader">
+        <div class="loader-inner">
+            <div class="loader-circle"></div>
+            <span class="loader-text">SP</span>
+        </div>
+    </div>
+
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scroll-progress"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <a href="#home" class="logo">
+            <span class="logo-bracket">&lt;</span>SP<span class="logo-bracket">/&gt;</span>
+        </a>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="#home" class="nav-link active">Home</a></li>
+            <li><a href="#about" class="nav-link">About</a></li>
+            <li><a href="#skills" class="nav-link">Skills</a></li>
+            <li><a href="#experience" class="nav-link">Experience</a></li>
+            <li><a href="#projects" class="nav-link">Projects</a></li>
+            <li><a href="#achievements" class="nav-link">Achievements</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
         </ul>
-        <div class="hamburger">
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
+        <div class="nav-actions">
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                <i class="fas fa-moon"></i>
+            </button>
+            <a href="sanket_pawar_resume.pdf" class="nav-resume-btn" download>
+                <i class="fas fa-download"></i> Resume
+            </a>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
     </nav>
 
-    <header id="home" class="hero">
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div id="particles-canvas" class="particles-canvas"></div>
         <div class="hero-content">
-            <span class="greeting">Hello, I'm</span>
-            <h1 class="name">Sanket Pawar</h1>
-            <h2 class="title">Full Stack Developer</h2>
-            <p class="description">Building modern web experiences with passion and precision.</p>
-            <div class="cta-buttons">
-                <a href="sanket_pawar_resume.pdf" class="btn primary" download>
-                    <i class="fas fa-download"></i> Download Resume
+            <div class="hero-badge reveal-up">
+                <span class="status-dot"></span> Available for opportunities
+            </div>
+            <h1 class="hero-greeting reveal-up">Hello, I'm</h1>
+            <h2 class="hero-name reveal-up">
+                <span class="gradient-text">Sanket Pawar</span>
+            </h2>
+            <h3 class="hero-title reveal-up">
+                <span id="typed-text"></span><span class="cursor">|</span>
+            </h3>
+            <p class="hero-description reveal-up">
+                Building modern web experiences with passion and precision.
+                I turn ideas into elegant, scalable digital solutions.
+            </p>
+            <div class="hero-cta reveal-up">
+                <a href="#projects" class="btn btn-primary">
+                    <span>View My Work</span>
+                    <i class="fas fa-arrow-right"></i>
                 </a>
-                <a href="#" class="btn secondary open-modal-btn">
-                    <i class="fas fa-paper-plane"></i> Say Hello
+                <a href="#contact" class="btn btn-outline open-modal-btn">
+                    <span>Say Hello</span>
+                    <i class="fas fa-paper-plane"></i>
                 </a>
             </div>
-            <div class="social-links">
-                <a href="https://github.com/sanketpawarr68-jpg" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/sanket-pawar-11859024a/" target="_blank"><i
-                        class="fab fa-linkedin"></i></a>
+            <div class="hero-social reveal-up">
+                <a href="https://github.com/sanketpawarr68-jpg" target="_blank" rel="noopener noreferrer"
+                    aria-label="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/sanket-pawar-11859024a/" target="_blank" rel="noopener noreferrer"
+                    aria-label="LinkedIn">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="mailto:sanketpawarr68@gmail.com" aria-label="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
             </div>
         </div>
-        <div id="canvas-container"></div>
-    </header>
+        <div class="hero-scroll-indicator">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+            <span>Scroll Down</span>
+        </div>
+    </section>
 
+    <!-- About Section -->
     <section id="about" class="section">
         <div class="container">
-            <h2 class="section-title">About Me</h2>
-            <div class="about-flex">
-                <div class="about-text-column">
-                    <p>I am a <strong>Cooperative Team Player</strong> with strong organizing abilities, knowledgeable
+            <h2 class="section-title reveal-up">
+                <span class="section-number">01.</span> About Me
+            </h2>
+            <div class="about-grid">
+                <div class="about-text reveal-up">
+                    <p>I am a <strong>cooperative team player</strong> with strong organizing abilities, knowledgeable
                         about accurately managing multiple projects at once. I pride myself on effectively organizing
                         work and completing assignments on schedule.</p>
-                    <p>As a <strong>Tech Expert</strong>, I have experience aligning technical work with business
+                    <p>As a <strong>tech expert</strong>, I have experience aligning technical work with business
                         objectives and enhancing systems. I am capable of successfully overseeing projects from
                         inception to completion and fostering business expansion.</p>
+                    <p>Currently pursuing <strong>M.Sc. Computer Science</strong> at Abasaheb Garware College, Pune
+                        under Savitribai Phule Pune University, with a focus on full-stack development and modern web
+                        technologies.</p>
                 </div>
-                <div class="about-stats-column">
-                    <div class="about-stat-card">
-                        <i class="fas fa-users-cog"></i>
+                <div class="about-cards reveal-up">
+                    <div class="info-card">
+                        <div class="info-card-icon">
+                            <i class="fas fa-users-cog"></i>
+                        </div>
                         <h4>Team Player</h4>
-                        <p>Cooperative & Organized</p>
+                        <p>Cooperative & organized collaboration</p>
                     </div>
-                    <div class="about-stat-card">
-                        <i class="fas fa-tasks"></i>
-                        <h4>Management</h4>
-                        <p>Multi-project Handling</p>
+                    <div class="info-card">
+                        <div class="info-card-icon">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <h4>Project Management</h4>
+                        <p>Multi-project handling with precision</p>
                     </div>
-
+                    <div class="info-card">
+                        <div class="info-card-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h4>Full Stack Dev</h4>
+                        <p>End-to-end web development</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-card-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h4>Problem Solver</h4>
+                        <p>Creative & efficient solutions</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Skills Section -->
     <section id="skills" class="section">
         <div class="container">
-            <h2 class="section-title">My Skills</h2>
-            <div class="skills-grid">
-                <div class="skill-card">
-                    <i class="fab fa-java"></i>
-                    <h3>Java</h3>
+            <h2 class="section-title reveal-up">
+                <span class="section-number">02.</span> Skills & Technologies
+            </h2>
+            <div class="skills-tabs reveal-up">
+                <button class="skill-tab active" data-tab="languages">Languages</button>
+                <button class="skill-tab" data-tab="frontend">Frontend</button>
+                <button class="skill-tab" data-tab="backend">Backend</button>
+                <button class="skill-tab" data-tab="tools">Tools</button>
+            </div>
+            <div class="skills-content">
+                <div class="skill-panel active" id="languages">
+                    <div class="skills-grid reveal-up">
+                        <div class="skill-card" data-skill="Java">
+                            <div class="skill-icon"><i class="fab fa-java"></i></div>
+                            <h3>Java</h3>
+                            <div class="skill-bar">
+                                <div class="skill-fill" data-width="80"></div>
+                            </div>
+                        </div>
+                        <div class="skill-card" data-skill="C/C++">
+                            <div class="skill-icon"><i class="fas fa-code"></i></div>
+                            <h3>C / C++</h3>
+                            <div class="skill-bar">
+                                <div class="skill-fill" data-width="75"></div>
+                            </div>
+                        </div>
+                        <div class="skill-card" data-skill="Python">
+                            <div class="skill-icon"><i class="fab fa-python"></i></div>
+                            <h3>Python</h3>
+                            <div class="skill-bar">
+                                <div class="skill-fill" data-width="85"></div>
+                            </div>
+                        </div>
+                        <div class="skill-card" data-skill="JavaScript">
+                            <div class="skill-icon"><i class="fab fa-js"></i></div>
+                            <h3>JavaScript</h3>
+                            <div class="skill-bar">
+                                <div class="skill-fill" data-width="90"></div>
+                            </div>
+                        </div>
+                        <div class="skill-card" data-skill="TypeScript">
+                            <div class="skill-icon"><i class="fab fa-js"></i></div>
+                            <h3>TypeScript</h3>
+                            <div class="skill-bar">
+                                <div class="skill-fill" data-width="75"></div>
+                            </div>
+                        </div>
+                        <div class="skill-card" data-skill="PHP">
+                            <div class="skill-icon"><i class="fab fa-php"></i></div>
+                            <h3>PHP</h3>
+                            <div class="skill-bar">
+                                <div class="skill-fill" data-width="65"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="skill-card">
-                    <i class="fas fa-code"></i>
-                    <h3>C / C++</h3>
+                <div class="skill-panel" id="frontend">
+                    <div class="skills-grid reveal-up">
+                        <div class="skill-card">
+                            <div class="skill-icon"><i class="fab fa-html5"></i></div>
+                            <h3>HTML5</h3>
+                            <div class="skill-bar">
+                                <div class="skill-fill" data-width="95"></div>
+                            </div>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon"><i class="fab fa-css3-alt"></i></div>
+                            <h3>CSS3</h3>
+                            <div class="skill-bar">
+                                <div class="skill-fill" data-width="90"></div>
+                            </div>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon"><i class="fab fa-react"></i></div>
+                            <h3>React.js</h3>
+                            <div class="skill-bar">
+                                <div class="skill-fill" data-width="85"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="skill-card">
-                    <i class="fab fa-python"></i>
-                    <h3>Python</h3>
+                <div class="skill-panel" id="backend">
+                    <div class="skills-grid reveal-up">
+                        <div class="skill-card">
+                            <div class="skill-icon"><i class="fab fa-node-js"></i></div>
+                            <h3>Node.js</h3>
+                            <div class="skill-bar">
+                                <div class="skill-fill" data-width="80"></div>
+                            </div>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon"><i class="fas fa-server"></i></div>
+                            <h3>Express.js</h3>
+                            <div class="skill-bar">
+                                <div class="skill-fill" data-width="80"></div>
+                            </div>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon"><i class="fas fa-database"></i></div>
+                            <h3>MongoDB</h3>
+                            <div class="skill-bar">
+                                <div class="skill-fill" data-width="75"></div>
+                            </div>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon"><i class="fas fa-database"></i></div>
+                            <h3>MySQL</h3>
+                            <div class="skill-bar">
+                                <div class="skill-fill" data-width="70"></div>
+                            </div>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon"><i class="fab fa-python"></i></div>
+                            <h3>Flask / FastAPI</h3>
+                            <div class="skill-bar">
+                                <div class="skill-fill" data-width="75"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="skill-card">
-                    <i class="fab fa-php"></i>
-                    <h3>PHP</h3>
-                </div>
-                <div class="skill-card">
-                    <i class="fas fa-database"></i>
-                    <h3>DBMS / RDBMS</h3>
-                </div>
-                <div class="skill-card">
-                    <i class="fab fa-html5"></i>
-                    <h3>HTML5</h3>
-                </div>
-                <div class="skill-card">
-                    <i class="fab fa-css3-alt"></i>
-                    <h3>CSS3</h3>
-                </div>
-                <div class="skill-card">
-                    <i class="fab fa-js"></i>
-                    <h3>JavaScript</h3>
+                <div class="skill-panel" id="tools">
+                    <div class="skills-grid reveal-up">
+                        <div class="skill-card">
+                            <div class="skill-icon"><i class="fab fa-git-alt"></i></div>
+                            <h3>Git & GitHub</h3>
+                            <div class="skill-bar">
+                                <div class="skill-fill" data-width="85"></div>
+                            </div>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon"><i class="fas fa-terminal"></i></div>
+                            <h3>VS Code</h3>
+                            <div class="skill-bar">
+                                <div class="skill-fill" data-width="90"></div>
+                            </div>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon"><i class="fas fa-network-wired"></i></div>
+                            <h3>REST APIs</h3>
+                            <div class="skill-bar">
+                                <div class="skill-fill" data-width="85"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="achievements" class="section">
-        <div class="container">
-            <h2 class="section-title">Achievements & Badges</h2>
-            <div class="badges-grid">
-                <!-- HackerRank C -->
-                <div class="badge-card">
-                    <h3>HackerRank</h3>
-                    <div class="badge-icon-wrapper">
-                        <div class="hexagon">
-                            <div class="badge-content">
-                                <span class="badge-letter">C</span>
-                                <span class="badge-lang">C language</span>
-                                <div class="badge-stars">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- HackerRank Problem Solving -->
-                <div class="badge-card">
-                    <h3>Problem Solving</h3>
-                    <div class="badge-icon-wrapper">
-                        <div class="hexagon gold">
-                            <div class="badge-content">
-                                <span class="badge-letter"><i class="fas fa-brain"
-                                        style="font-size: 2.5rem; color: #333;"></i></span>
-                                <span class="badge-lang">3 Stars</span>
-                                <div class="badge-stars">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <!-- <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i> -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Programming -->
-                <div class="badge-card">
-                    <h3>JS Algorithms</h3>
-                    <div class="badge-icon-wrapper">
-                        <div class="hexagon blue">
-                            <div class="badge-content">
-                                <span class="badge-letter">JS</span>
-                                <span class="badge-lang">Expert</span>
-                                <div class="badge-stars">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
+    <!-- Experience & Education Section -->
     <section id="experience" class="section">
         <div class="container">
-            <h2 class="section-title">Experience & Education</h2>
-            <div class="timeline">
-
-                <!-- Education 3 -->
-                <div class="timeline-item right">
+            <h2 class="section-title reveal-up">
+                <span class="section-number">03.</span> Experience & Education
+            </h2>
+            <div class="timeline reveal-up">
+                <div class="timeline-item" data-aos="fade-right">
+                    <div class="timeline-dot"></div>
                     <div class="timeline-content">
-                        <span class="timeline-date">( Currently Pursuing ) 2025</span>
+                        <span class="timeline-badge">Currently Pursuing - 2025</span>
                         <h3>M.Sc. Computer Science</h3>
                         <h4>Abasaheb Garware College, Pune</h4>
-                        <p>Savitribai Phule Pune University.</p>
+                        <p>Savitribai Phule Pune University</p>
                     </div>
                 </div>
-                <!-- Education 1 -->
-                <div class="timeline-item left">
+                <div class="timeline-item" data-aos="fade-left">
+                    <div class="timeline-dot"></div>
                     <div class="timeline-content">
-                        <span class="timeline-date">Mar 2025</span>
+                        <span class="timeline-badge">Mar 2025</span>
                         <h3>B.Sc. Computer Science</h3>
                         <h4>Abasaheb Garware College, Pune</h4>
-                        <p>Savitribai Phule Pune University.</p>
+                        <p>Savitribai Phule Pune University</p>
                     </div>
                 </div>
-
-                <!-- Voluntering -->
-                <div class="timeline-item right">
+                <div class="timeline-item" data-aos="fade-right">
+                    <div class="timeline-dot"></div>
                     <div class="timeline-content">
-                        <span class="timeline-date">Volunteering</span>
-                        <h3>Door Step School Foundation</h3>
-                        <h4>Volunteer</h4>
-                        <p>Certificate for volunteering.</p>
-                    </div>
-                </div>
-
-                <!-- Education 2 -->
-                <div class="timeline-item left">
-                    <div class="timeline-content">
-                        <span class="timeline-date">Mar 2022</span>
+                        <span class="timeline-badge">Mar 2022</span>
                         <h3>12th - Science</h3>
                         <h4>Maharaja Jivajirao Shinde Mahavidyalay</h4>
-                        <p>Maharashtra State Board of Secondary and Higher Secondary Education, Pune.</p>
+                        <p>Maharashtra State Board, Pune</p>
                     </div>
                 </div>
-                <!-- Education 3 -->
-                <div class="timeline-item right">
+                <div class="timeline-item" data-aos="fade-left">
+                    <div class="timeline-dot"></div>
                     <div class="timeline-content">
-                        <span class="timeline-date">Mar 2020</span>
+                        <span class="timeline-badge">Mar 2020</span>
                         <h3>10th - Semi-English</h3>
                         <h4>Sharda Vidya Niketan Shrigonda</h4>
-                        <p>Maharashtra State Board of Secondary and Higher Secondary Education, Pune.</p>
+                        <p>Maharashtra State Board, Pune</p>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
 
+    <!-- Projects Section -->
     <section id="projects" class="section">
         <div class="container">
-            <h2 class="section-title">Featured Projects</h2>
+            <h2 class="section-title reveal-up">
+                <span class="section-number">04.</span> Featured Projects
+            </h2>
             <div class="projects-grid">
                 <!-- Project 1 -->
-                <div class="project-card">
-                    <div class="project-info">
-                        <h3>Paper Trading Simulation</h3>
-                        <p>Comparison platform where users can register, trade virtual stocks, and track their trading
-                            performance without financial risk.</p>
-                        <div class="tags">
-                            <span>HTML</span><span>CSS</span><span>JS</span><span>Python</span>
+                <div class="project-card reveal-up">
+                    <div class="project-card-header">
+                        <div class="project-card-top">
+                            <i class="fas fa-folder-open project-folder-icon"></i>
+                            <div class="project-links">
+                                <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                                <a href="#" aria-label="Live Demo"><i class="fas fa-external-link-alt"></i></a>
+                            </div>
                         </div>
-                        <a href="#" class="project-link">View Project <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="project-card-body">
+                        <h3>CareerForge AI</h3>
+                        <p>AI-powered career development platform with resume builder and mock interview simulator.
+                            Integrated OpenAI & Google Gemini APIs for real-time ATS scoring.</p>
+                        <div class="project-tags">
+                            <span>React</span>
+                            <span>TypeScript</span>
+                            <span>FastAPI</span>
+                            <span>MongoDB</span>
+                            <span>OpenAI</span>
+                        </div>
                     </div>
                 </div>
+
                 <!-- Project 2 -->
-                <div class="project-card">
-                    <div class="project-info">
-                        <h3>Vehicle Entry System</h3>
-                        <p>A system to manage vehicle entry and exit with payment integration.</p>
-                        <div class="tags">
-                            <span>HTML</span><span>CSS</span><span>JS</span>
+                <div class="project-card reveal-up">
+                    <div class="project-card-header">
+                        <div class="project-card-top">
+                            <i class="fas fa-folder-open project-folder-icon"></i>
+                            <div class="project-links">
+                                <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                                <a href="#" aria-label="Live Demo"><i class="fas fa-external-link-alt"></i></a>
+                            </div>
                         </div>
-                        <a href="#" class="project-link">View Project <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="project-card-body">
+                        <h3>Paper Trading Simulation</h3>
+                        <p>Full-stack stock trading simulator with real NSE data integration. Users can practice trading
+                            strategies with virtual currency and track performance.</p>
+                        <div class="project-tags">
+                            <span>React</span>
+                            <span>Python</span>
+                            <span>Flask</span>
+                            <span>MongoDB</span>
+                        </div>
                     </div>
                 </div>
+
                 <!-- Project 3 -->
-                <div class="project-card">
-                    <div class="project-info">
-                        <h3>Resume Builder</h3>
-                        <p>An interactive resume builder with dynamic templates and preview.</p>
-                        <div class="tags">
-                            <span>React</span><span>TypeScript</span>
+                <div class="project-card reveal-up">
+                    <div class="project-card-header">
+                        <div class="project-card-top">
+                            <i class="fas fa-folder-open project-folder-icon"></i>
+                            <div class="project-links">
+                                <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                                <a href="#" aria-label="Live Demo"><i class="fas fa-external-link-alt"></i></a>
+                            </div>
                         </div>
-                        <a href="#" class="project-link">View Project <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="project-card-body">
+                        <h3>Real-Time Chat & Video App</h3>
+                        <p>WhatsApp-clone with instant messaging and low-latency audio/video calls using WebRTC via
+                            PeerJS and Socket.io for real-time communication.</p>
+                        <div class="project-tags">
+                            <span>React</span>
+                            <span>Node.js</span>
+                            <span>Socket.io</span>
+                            <span>WebRTC</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="project-card reveal-up">
+                    <div class="project-card-header">
+                        <div class="project-card-top">
+                            <i class="fas fa-folder-open project-folder-icon"></i>
+                            <div class="project-links">
+                                <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                                <a href="#" aria-label="Live Demo"><i class="fas fa-external-link-alt"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card-body">
+                        <h3>Vehicle Entry System</h3>
+                        <p>Smart campus vehicle tracking system to digitize entry/exit logs, monitor movements, and
+                            generate daily reports for enhanced security.</p>
+                        <div class="project-tags">
+                            <span>Node.js</span>
+                            <span>Express</span>
+                            <span>MongoDB</span>
+                            <span>React</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="project-card reveal-up">
+                    <div class="project-card-header">
+                        <div class="project-card-top">
+                            <i class="fas fa-folder-open project-folder-icon"></i>
+                            <div class="project-links">
+                                <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                                <a href="#" aria-label="Live Demo"><i class="fas fa-external-link-alt"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card-body">
+                        <h3>Resume Builder</h3>
+                        <p>An interactive resume builder with dynamic templates, live preview, and PDF export
+                            functionality for professional-quality resumes.</p>
+                        <div class="project-tags">
+                            <span>React</span>
+                            <span>TypeScript</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="languages" class="section">
+    <!-- Achievements Section -->
+    <section id="achievements" class="section">
         <div class="container">
-            <h2 class="section-title">Languages</h2>
-            <div class="languages-grid">
+            <h2 class="section-title reveal-up">
+                <span class="section-number">05.</span> Achievements & Badges
+            </h2>
+            <div class="badges-grid reveal-up">
+                <div class="badge-card">
+                    <div class="badge-glow"></div>
+                    <div class="badge-hex" data-color="peach">
+                        <span class="badge-letter">C</span>
+                    </div>
+                    <h3>HackerRank</h3>
+                    <p>C Language</p>
+                    <div class="badge-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                </div>
+                <div class="badge-card">
+                    <div class="badge-glow gold"></div>
+                    <div class="badge-hex" data-color="gold">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Problem Solving</h3>
+                    <p>HackerRank</p>
+                    <div class="badge-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <div class="badge-card">
+                    <div class="badge-glow blue"></div>
+                    <div class="badge-hex" data-color="blue">
+                        <span class="badge-letter">JS</span>
+                    </div>
+                    <h3>JS Algorithms</h3>
+                    <p>Expert</p>
+                    <div class="badge-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Languages Spoken -->
+            <h3 class="subsection-title reveal-up">Languages I Speak</h3>
+            <div class="languages-grid reveal-up">
                 <div class="language-card">
-                    <h3>Marathi</h3>
-                    <div class="progress-bar">
-                        <div class="progress" style="width: 100%"><span>100%</span></div>
+                    <div class="language-info">
+                        <h4>Marathi</h4>
+                        <span>Native</span>
+                    </div>
+                    <div class="language-bar">
+                        <div class="language-fill" data-width="100"></div>
                     </div>
                 </div>
                 <div class="language-card">
-                    <h3>Hindi</h3>
-                    <div class="progress-bar">
-                        <div class="progress" style="width: 100%"><span>100%</span></div>
+                    <div class="language-info">
+                        <h4>Hindi</h4>
+                        <span>Fluent</span>
+                    </div>
+                    <div class="language-bar">
+                        <div class="language-fill" data-width="100"></div>
                     </div>
                 </div>
                 <div class="language-card">
-                    <h3>English</h3>
-                    <div class="progress-bar">
-                        <div class="progress" style="width: 90%"><span>90%</span></div>
+                    <div class="language-info">
+                        <h4>English</h4>
+                        <span>Proficient</span>
+                    </div>
+                    <div class="language-bar">
+                        <div class="language-fill" data-width="90"></div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Resume Section -->
     <section id="resume" class="section">
         <div class="container">
-            <div class="resume-container">
-                <!-- Left: Visual Preview -->
-                <div class="resume-preview">
+            <div class="resume-showcase reveal-up">
+                <div class="resume-visual">
                     <div class="resume-paper">
-                        <div class="resume-header-line"></div>
-                        <div class="resume-content-block" style="margin-top: 2rem;">
-                            <div class="line-full" style="background: #ccc;"></div>
-                            <div class="line-full"></div>
-                            <div class="line-short"></div>
+                        <div class="resume-mock-header"></div>
+                        <div class="resume-mock-line w60"></div>
+                        <div class="resume-mock-line w100"></div>
+                        <div class="resume-mock-line w80"></div>
+                        <div class="resume-mock-spacer"></div>
+                        <div class="resume-mock-line w100"></div>
+                        <div class="resume-mock-line w90"></div>
+                        <div class="resume-mock-line w70"></div>
+                        <div class="resume-mock-spacer"></div>
+                        <div class="resume-mock-line w100"></div>
+                        <div class="resume-mock-line w50"></div>
+                    </div>
+                </div>
+                <div class="resume-details">
+                    <h3>My Resume</h3>
+                    <p>Get a detailed look at my professional experience, education, technical skills, and project
+                        portfolio.</p>
+                    <ul class="resume-highlights">
+                        <li><i class="fas fa-check-circle"></i> Complete professional summary</li>
+                        <li><i class="fas fa-check-circle"></i> Detailed projects & tech stacks</li>
+                        <li><i class="fas fa-check-circle"></i> Technical skills & certifications</li>
+                        <li><i class="fas fa-check-circle"></i> Education & achievements</li>
+                    </ul>
+                    <div class="resume-actions">
+                        <a href="sanket_pawar_resume.pdf" class="btn btn-primary" download>
+                            <i class="fas fa-download"></i> Download PDF
+                        </a>
+                        <a href="resume.html" target="_blank" class="btn btn-outline">
+                            <i class="fas fa-eye"></i> View Online
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title reveal-up">
+                <span class="section-number">06.</span> Get In Touch
+            </h2>
+            <div class="contact-content">
+                <div class="contact-text reveal-up">
+                    <p>I'm currently open to new opportunities. Whether you have a project idea, a question, or just
+                        want to say hi &mdash; my inbox is always open!</p>
+                </div>
+                <div class="contact-cards reveal-up">
+                    <a href="mailto:sanketpawarr68@gmail.com" class="contact-card">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <span>sanketpawarr68@gmail.com</span>
                         </div>
-                        <div class="resume-content-block">
-                            <div class="line-full"></div>
-                            <div class="line-full"></div>
-                            <div class="line-thin"></div>
-                            <div class="line-thin"></div>
+                    </a>
+                    <a href="tel:+917823879053" class="contact-card">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>Phone</h4>
+                            <span>+91 78238 79053</span>
                         </div>
-                        <div class="resume-content-block">
-                            <div class="line-full"></div>
-                            <div class="line-short"></div>
-                            <div class="line-thin"></div>
-                        </div>
-                        <div style="flex-grow: 1; display: flex; align-items: flex-end; justify-content: flex-end;">
-                            <i class="fas fa-signature" style="color: #ccc; font-size: 3rem;"></i>
+                    </a>
+                    <div class="contact-card">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Location</h4>
+                            <span>Pune, Maharashtra, India</span>
                         </div>
                     </div>
                 </div>
+                <div class="contact-form-wrapper reveal-up">
+                    <a href="#" class="btn btn-primary btn-lg open-modal-btn">
+                        <i class="fas fa-paper-plane"></i> Send Me a Message
+                    </a>
+                </div>
 
-                <!-- Right: Content -->
-                <div class="resume-info">
-                    <h3>What is Inside?</h3>
-                    <ul class="resume-list">
-                        <li>Complete professional summary</li>
-                        <li>Detailed work experience and projects</li>
-                        <li>Technical skills and certifications</li>
-                        <li>Education and achievements</li>
-                    </ul>
-                    <a href="sanket_pawar_resume.pdf" class="btn primary large" download>
-                        <i class="fas fa-download"></i> Download My Resume
-                    </a>
-                    <a href="sanket_pawar_resume.pdf" target="_blank" class="view-online">
-                        <i class="fas fa-eye"></i> View Online
-                    </a>
+                <!-- Maps -->
+                <div class="maps-grid reveal-up">
+                    <div class="map-card">
+                        <div class="map-label">
+                            <i class="fas fa-location-dot"></i> Current: Pune, Maharashtra
+                        </div>
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d121058.92836603205!2d73.79257692120038!3d18.524890422152862!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bf2e67461101%3A0x828d43bf9d9ee343!2sPune%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1708182280000!5m2!1sen!2sin"
+                            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                    <div class="map-card">
+                        <div class="map-label">
+                            <i class="fas fa-home"></i> Permanent: Ghodegaon, Shrigonda
+                        </div>
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d120934.42398466666!2d74.63972288330752!3d18.66779427382215!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc369680ee12379%3A0xe54129994c50257e!2sShrigonda%2C%20Maharashtra%20413701!5e0!3m2!1sen!2sin!4v1708182220000!5m2!1sen!2sin"
+                            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="contact" class="section">
+    <!-- Footer -->
+    <footer class="footer">
         <div class="container">
-            <h2 class="section-title">Get In Touch & Locate Me</h2>
-            <p class="contact-text">I'm currently open to new opportunities. Whether you have a question or just want to
-                say hi, I'll try my best to get back to you!</p>
-            <a href="#" class="btn primary open-modal-btn">Say Hello</a>
-            <div class="contact-details">
-                <div class="contact-item">
-                    <i class="fas fa-envelope"></i>
-                    <a href="mailto:sanketpawarr68@gmail.com">sanketpawarr68@gmail.com</a>
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <span class="logo-bracket">&lt;</span>SP<span class="logo-bracket">/&gt;</span>
                 </div>
-                <div class="contact-item">
-                    <i class="fas fa-phone"></i>
-                    <a href="tel:+917823879053">+91 78238 79053</a>
+                <div class="footer-links">
+                    <a href="https://github.com/sanketpawarr68-jpg" target="_blank" rel="noopener noreferrer"><i
+                            class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/sanket-pawar-11859024a/" target="_blank"
+                        rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="mailto:sanketpawarr68@gmail.com"><i class="fas fa-envelope"></i></a>
                 </div>
-            </div>
-
-            <!-- Map Locations -->
-            <div class="location-container">
-                <!-- Current Address -->
-                <div class="location-card">
-                    <div class="location-label">Current: Pune, Maharashtra</div>
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d121058.92836603205!2d73.79257692120038!3d18.524890422152862!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bf2e67461101%3A0x828d43bf9d9ee343!2sPune%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1708182280000!5m2!1sen!2sin"
-                        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                </div>
-
-                <!-- Permanent Address -->
-                <div class="location-card">
-                    <div class="location-label">Permanent: Ghodegaon, Shrigonda</div>
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d120934.42398466666!2d74.63972288330752!3d18.66779427382215!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc369680ee12379%3A0xe54129994c50257e!2sShrigonda%2C%20Maharashtra%20413701!5e0!3m2!1sen!2sin!4v1708182220000!5m2!1sen!2sin"
-                        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                </div>
+                <p>&copy; 2025 Sanket Pawar. Designed & Built with <i class="fas fa-heart"
+                        style="color: var(--accent-primary);"></i></p>
             </div>
         </div>
-    </section>
-
-    <footer>
-        <p>&copy; 2024 Sanket Pawar. All rights reserved.</p>
     </footer>
 
-    <!-- Three.js CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="script.js"></script>
+    <!-- Back to Top -->
+    <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
     <!-- Contact Modal -->
     <div id="contact-modal" class="modal">
+        <div class="modal-overlay"></div>
         <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <h2>Send Message</h2>
+            <button class="modal-close" id="modal-close">&times;</button>
+            <h2>Send a Message</h2>
+            <p class="modal-subtitle">I'll get back to you as soon as possible.</p>
             <form id="contact-form" action="https://formspree.io/f/xkovbrqn" method="POST">
                 <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" name="name" required>
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" placeholder="John Doe" required>
                 </div>
                 <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
+                    <label for="email">Your Email</label>
+                    <input type="email" id="email" name="email" placeholder="john@example.com" required>
                 </div>
                 <div class="form-group">
                     <label for="message">Message</label>
-                    <textarea id="message" name="message" rows="5" required></textarea>
+                    <textarea id="message" name="message" rows="5" placeholder="Hey Sanket, I'd love to..."
+                        required></textarea>
                 </div>
-                <button type="submit" class="btn primary">Send Feedback</button>
+                <button type="submit" class="btn btn-primary btn-full">
+                    <span>Send Message</span>
+                    <i class="fas fa-paper-plane"></i>
+                </button>
             </form>
-            <!-- <p class="form-note">Please replace <strong>YOUR_FORM_ID</strong> in the HTML with your actual Formspree ID.
-            </p> -->
         </div>
     </div>
+
+    <script src="script.js"></script>
+</body>
 
 </html>

@@ -1,76 +1,254 @@
+/* ==========================================
+   SANKET PAWAR - PORTFOLIO SCRIPTS
+   ========================================== */
+
 document.addEventListener('DOMContentLoaded', () => {
-    // --- Mobile Menu ---
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav-links');
-    const links = document.querySelectorAll('.nav-links li');
 
-    hamburger.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-        hamburger.classList.toggle('active');
+    // ---------- Page Loader ----------
+    const loader = document.getElementById('loader');
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            loader.classList.add('hidden');
+        }, 800);
+    });
+    // Fallback: hide loader after 3 seconds
+    setTimeout(() => loader.classList.add('hidden'), 3000);
+
+    // ---------- Typing Effect ----------
+    const typedEl = document.getElementById('typed-text');
+    const phrases = [
+        'Full Stack Developer',
+        'React.js Enthusiast',
+        'Python Developer',
+        'Problem Solver',
+        'Tech Explorer'
+    ];
+    let phraseIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    let typeDelay = 100;
+
+    function typeEffect() {
+        const current = phrases[phraseIndex];
+
+        if (isDeleting) {
+            typedEl.textContent = current.substring(0, charIndex - 1);
+            charIndex--;
+            typeDelay = 50;
+        } else {
+            typedEl.textContent = current.substring(0, charIndex + 1);
+            charIndex++;
+            typeDelay = 100;
+        }
+
+        if (!isDeleting && charIndex === current.length) {
+            typeDelay = 2000;
+            isDeleting = true;
+        } else if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            phraseIndex = (phraseIndex + 1) % phrases.length;
+            typeDelay = 300;
+        }
+
+        setTimeout(typeEffect, typeDelay);
+    }
+
+    if (typedEl) typeEffect();
+
+    // ---------- Scroll Progress Bar ----------
+    const scrollProgress = document.getElementById('scroll-progress');
+    function updateScrollProgress() {
+        const scrollTop = document.documentElement.scrollTop;
+        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const progress = (scrollTop / scrollHeight) * 100;
+        scrollProgress.style.width = progress + '%';
+    }
+
+    // ---------- Navbar Scroll Effect ----------
+    const navbar = document.getElementById('navbar');
+    const backToTop = document.getElementById('back-to-top');
+
+    function handleScroll() {
+        const scrollY = window.scrollY;
+
+        // Navbar background
+        if (scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+
+        // Back to top button
+        if (scrollY > 400) {
+            backToTop.classList.add('visible');
+        } else {
+            backToTop.classList.remove('visible');
+        }
+
+        updateScrollProgress();
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    // Back to top click
+    backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    links.forEach(link => {
-        link.addEventListener('click', () => {
-            navLinks.classList.remove('active');
-            hamburger.classList.remove('active');
-        });
-    });
+    // ---------- Active Nav Link on Scroll ----------
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
 
-    // --- Scroll Animations ---
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('show');
+    function updateActiveNav() {
+        const scrollY = window.scrollY + 100;
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
+            const sectionId = section.getAttribute('id');
+
+            if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + sectionId) {
+                        link.classList.add('active');
+                    }
+                });
             }
         });
-    }, { threshold: 0.1 });
+    }
 
-    const hiddenElements = document.querySelectorAll('.skill-card, .project-card, .section-title, .language-card, .timeline-item, .badge-card, .resume-preview, .resume-info, .location-card, .about-stat-card, .about-text-column');
-    hiddenElements.forEach((el) => {
-        el.classList.add('hidden');
-        observer.observe(el);
+    window.addEventListener('scroll', updateActiveNav, { passive: true });
+
+    // ---------- Mobile Menu ----------
+    const hamburger = document.getElementById('hamburger');
+    const navLinksContainer = document.getElementById('nav-links');
+
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        navLinksContainer.classList.toggle('active');
     });
 
-    // --- Modal Logic ---
-    const modal = document.getElementById('contact-modal');
-    const openBtns = document.querySelectorAll('.open-modal-btn');
-    const closeBtn = document.querySelector('.close-modal');
+    // Close on link click
+    navLinksContainer.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navLinksContainer.classList.remove('active');
+        });
+    });
 
-    if (openBtns.length > 0) {
-        openBtns.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.preventDefault();
-                modal.style.display = 'flex';
-                setTimeout(() => modal.classList.add('open'), 10);
+    // ---------- Theme Toggle ----------
+    const themeToggle = document.getElementById('theme-toggle');
+    const html = document.documentElement;
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    html.setAttribute('data-theme', savedTheme);
+    updateThemeIcon(savedTheme);
+
+    themeToggle.addEventListener('click', () => {
+        const current = html.getAttribute('data-theme');
+        const next = current === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+        updateThemeIcon(next);
+    });
+
+    function updateThemeIcon(theme) {
+        const icon = themeToggle.querySelector('i');
+        icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+    }
+
+    // ---------- Scroll Reveal ----------
+    const revealElements = document.querySelectorAll('.reveal-up');
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // ---------- Skill Bars Animation ----------
+    const skillFills = document.querySelectorAll('.skill-fill');
+    const languageFills = document.querySelectorAll('.language-fill');
+
+    const barObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const fill = entry.target;
+                const width = fill.getAttribute('data-width');
+                fill.style.width = width + '%';
+                barObserver.unobserve(fill);
+            }
+        });
+    }, { threshold: 0.3 });
+
+    skillFills.forEach(fill => barObserver.observe(fill));
+    languageFills.forEach(fill => barObserver.observe(fill));
+
+    // ---------- Skill Tabs ----------
+    const tabs = document.querySelectorAll('.skill-tab');
+    const panels = document.querySelectorAll('.skill-panel');
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const target = tab.getAttribute('data-tab');
+
+            tabs.forEach(t => t.classList.remove('active'));
+            panels.forEach(p => p.classList.remove('active'));
+
+            tab.classList.add('active');
+            document.getElementById(target).classList.add('active');
+
+            // Re-trigger bar animations for newly visible panel
+            document.getElementById(target).querySelectorAll('.skill-fill').forEach(fill => {
+                fill.style.width = '0';
+                setTimeout(() => {
+                    fill.style.width = fill.getAttribute('data-width') + '%';
+                }, 100);
             });
         });
-    }
+    });
 
-    if (closeBtn) {
-        closeBtn.addEventListener('click', () => {
-            modal.classList.remove('open');
-            setTimeout(() => modal.style.display = 'none', 300);
+    // ---------- Contact Modal ----------
+    const modal = document.getElementById('contact-modal');
+    const modalClose = document.getElementById('modal-close');
+    const openModalBtns = document.querySelectorAll('.open-modal-btn');
+
+    openModalBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            modal.classList.add('open');
+            document.body.style.overflow = 'hidden';
         });
+    });
+
+    function closeModal() {
+        modal.classList.remove('open');
+        document.body.style.overflow = '';
     }
 
-    window.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            modal.classList.remove('open');
-            setTimeout(() => modal.style.display = 'none', 300);
+    modalClose.addEventListener('click', closeModal);
+    modal.querySelector('.modal-overlay').addEventListener('click', closeModal);
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('open')) {
+            closeModal();
         }
     });
 
-    // --- Formspree / Email Handling ---
+    // ---------- Contact Form ----------
     const form = document.getElementById('contact-form');
     if (form) {
-        form.addEventListener("submit", function (ev) {
+        form.addEventListener('submit', function (ev) {
             ev.preventDefault();
             const data = new FormData(form);
             const action = form.action;
-
             const submitBtn = form.querySelector('button[type="submit"]');
-            const originalText = submitBtn.textContent;
-            submitBtn.textContent = 'Sending...';
+            const originalHTML = submitBtn.innerHTML;
+
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
             submitBtn.disabled = true;
 
             fetch(action, {
@@ -79,232 +257,175 @@ document.addEventListener('DOMContentLoaded', () => {
                 headers: { 'Accept': 'application/json' }
             }).then(response => {
                 if (response.ok) {
-                    alert("Thanks! Your message has been sent.");
                     form.reset();
-                    modal.classList.remove('open');
-                    setTimeout(() => modal.style.display = 'none', 300);
+                    closeModal();
+                    showToast('Message sent successfully!', 'success');
                 } else {
                     response.json().then(data => {
-                        if (Object.hasOwn(data, 'errors')) {
-                            alert(data["errors"].map(error => error["message"]).join(", "));
+                        if (data.errors) {
+                            showToast(data.errors.map(e => e.message).join(', '), 'error');
                         } else {
-                            alert("Oops! There was a problem submitting your form");
+                            showToast('Something went wrong. Please try again.', 'error');
                         }
                     });
                 }
-            }).catch(error => {
-                alert("Oops! There was a problem submitting your form");
+            }).catch(() => {
+                showToast('Network error. Please try again.', 'error');
             }).finally(() => {
-                submitBtn.textContent = originalText;
+                submitBtn.innerHTML = originalHTML;
                 submitBtn.disabled = false;
             });
         });
     }
 
-    // --- 3D Scene with Three.js ---
-    initThreeJS();
+    // ---------- Toast Notification ----------
+    function showToast(message, type) {
+        const toast = document.createElement('div');
+        toast.style.cssText = `
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            padding: 0.8rem 1.5rem;
+            background: ${type === 'success' ? '#00d4aa' : '#ff4757'};
+            color: #fff;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            z-index: 9999;
+            opacity: 0;
+            transition: all 0.3s ease;
+            font-family: var(--font-main);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        `;
+        toast.textContent = message;
+        document.body.appendChild(toast);
+
+        requestAnimationFrame(() => {
+            toast.style.opacity = '1';
+            toast.style.transform = 'translateX(-50%) translateY(0)';
+        });
+
+        setTimeout(() => {
+            toast.style.opacity = '0';
+            toast.style.transform = 'translateX(-50%) translateY(20px)';
+            setTimeout(() => toast.remove(), 300);
+        }, 3000);
+    }
+
+    // ---------- Particle Background ----------
+    initParticles();
 });
 
-function initThreeJS() {
-    const container = document.getElementById('canvas-container');
+// ---------- Particle Canvas Animation ----------
+function initParticles() {
+    const container = document.getElementById('particles-canvas');
     if (!container) return;
 
-    // SCENE SETUP
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
-    camera.position.set(0, 3, 8); // Position camera to look down at the desk
-    camera.lookAt(0, 0, 0);
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    container.appendChild(canvas);
 
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-    renderer.setSize(container.clientWidth, container.clientHeight);
-    renderer.shadowMap.enabled = true; // Enable shadows
-    container.appendChild(renderer.domElement);
+    let width, height, particles, mouse;
 
-    // LIGHTS
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
-    scene.add(ambientLight);
-
-    const pointLight = new THREE.PointLight(0x00f2fe, 1, 100);
-    pointLight.position.set(2, 5, 2);
-    pointLight.castShadow = true;
-    scene.add(pointLight);
-
-    const monitorLight = new THREE.PointLight(0x4facfe, 0.8, 5); // Glow from screen
-    monitorLight.position.set(0, 1.5, 0.5);
-    scene.add(monitorLight);
-
-    // GROUP FOR THE WHOLE SETUP
-    const deskGroup = new THREE.Group();
-    scene.add(deskGroup);
-
-    // 1. DESK
-    const deskGeometry = new THREE.BoxGeometry(7, 0.2, 3);
-    const deskMaterial = new THREE.MeshStandardMaterial({ color: 0x222222 });
-    const desk = new THREE.Mesh(deskGeometry, deskMaterial);
-    desk.position.y = -0.1;
-    desk.receiveShadow = true;
-    deskGroup.add(desk);
-
-    // 2. MONITOR STAND
-    const standGeo = new THREE.BoxGeometry(0.3, 1, 0.3);
-    const standMat = new THREE.MeshStandardMaterial({ color: 0x111111 });
-    const stand = new THREE.Mesh(standGeo, standMat);
-    stand.position.set(0, 0.5, -0.5);
-    deskGroup.add(stand);
-
-    // 3. MONITOR FRAME
-    const monitorGeo = new THREE.BoxGeometry(3.2, 2, 0.2);
-    const monitorMat = new THREE.MeshStandardMaterial({ color: 0x000000 });
-    const monitorFrame = new THREE.Mesh(monitorGeo, monitorMat);
-    monitorFrame.position.set(0, 1.5, -0.5);
-    monitorFrame.castShadow = true;
-    deskGroup.add(monitorFrame);
-
-    // 4. MONITOR SCREEN (DYNAMIC CANVAS TEXTURE)
-    const screenCanvas = document.createElement('canvas');
-    screenCanvas.width = 512;
-    screenCanvas.height = 256;
-    const ctx = screenCanvas.getContext('2d');
-
-    // Initial Canvas State
-    ctx.fillStyle = '#000000';
-    ctx.fillRect(0, 0, 512, 256);
-
-    const screenTexture = new THREE.CanvasTexture(screenCanvas);
-    const screenGeo = new THREE.PlaneGeometry(3, 1.8);
-    const screenMat = new THREE.MeshBasicMaterial({ map: screenTexture });
-    const screenMesh = new THREE.Mesh(screenGeo, screenMat);
-    screenMesh.position.set(0, 1.5, -0.39); // Slightly in front of frame
-    deskGroup.add(screenMesh);
-
-    // 5. KEYBOARD
-    const kbGeo = new THREE.BoxGeometry(1.5, 0.1, 0.6);
-    const kbMat = new THREE.MeshStandardMaterial({ color: 0x333333 });
-    const keyboard = new THREE.Mesh(kbGeo, kbMat);
-    keyboard.position.set(0, 0.1, 0.8);
-    keyboard.rotation.x = 0.1; // Slight tilt
-    deskGroup.add(keyboard);
-
-    // 6. SIMPLE STUDENT (Abstract Low Poly)
-    const bodyGroup = new THREE.Group();
-    deskGroup.add(bodyGroup);
-
-    // Body
-    const torsoGeo = new THREE.CylinderGeometry(0.4, 0.4, 1.2, 16);
-    const torsoMat = new THREE.MeshStandardMaterial({ color: 0x3366cc }); // Blue shirt
-    const torso = new THREE.Mesh(torsoGeo, torsoMat);
-    torso.position.set(0, 0.5, 2.2);
-    bodyGroup.add(torso);
-
-    // Head
-    const headGeo = new THREE.SphereGeometry(0.35, 32, 32);
-    const headMat = new THREE.MeshStandardMaterial({ color: 0xffccaa }); // Skin tone
-    const head = new THREE.Mesh(headGeo, headMat);
-    head.position.set(0, 1.3, 2.2);
-    bodyGroup.add(head);
-
-    // Arms
-    const armGeo = new THREE.CylinderGeometry(0.1, 0.1, 1.2);
-    const armMat = new THREE.MeshStandardMaterial({ color: 0x3366cc });
-
-    const leftArm = new THREE.Mesh(armGeo, armMat);
-    leftArm.position.set(-0.5, 0.8, 2);
-    leftArm.rotation.set(1.5, 0, -0.3); // Reaching for keyboard
-    bodyGroup.add(leftArm);
-
-    const rightArm = new THREE.Mesh(armGeo, armMat);
-    rightArm.position.set(0.5, 0.8, 2);
-    rightArm.rotation.set(1.5, 0, 0.3);
-    bodyGroup.add(rightArm);
-
-
-    // TYPING ANIMATION STATE
-    const codeLines = [
-        "#include <stdio.h>",
-        "int main() {",
-        "  printf(\"Hello World\");",
-        "  return 0;",
-        "}"
-    ];
-    let lineIndex = 0;
-    let charIndex = 0;
-    let lastTypeTime = 0;
-    const typeSpeed = 100; // ms per char
-
-    function updateScreen(time) {
-        if (time - lastTypeTime > typeSpeed && lineIndex < codeLines.length) {
-            lastTypeTime = time;
-
-            // Draw Background
-            ctx.fillStyle = '#1e1e1e'; // VS Code dark
-            ctx.fillRect(0, 0, 512, 256);
-
-            // Draw Text
-            ctx.fillStyle = '#00ff00'; // Green text
-            ctx.font = '24px Consolas, monospace';
-            ctx.textBaseline = 'top';
-
-            let yOffset = 20;
-            for (let i = 0; i <= lineIndex; i++) {
-                let text = codeLines[i];
-                if (i === lineIndex) {
-                    text = text.substring(0, charIndex);
-                    charIndex++;
-                }
-                ctx.fillText(text, 20, yOffset);
-                yOffset += 30;
-            }
-
-            // Blinking Cursor
-            if (lineIndex < codeLines.length) {
-                const currentLine = codeLines[lineIndex].substring(0, charIndex);
-                const width = ctx.measureText(currentLine).width;
-                ctx.fillRect(20 + width, yOffset - 30, 2, 24);
-            }
-
-            // Move to next line if finished
-            if (charIndex > codeLines[lineIndex].length) {
-                lineIndex++;
-                charIndex = 0;
-            }
-
-            // Reset loop if done
-            if (lineIndex >= codeLines.length) {
-                setTimeout(() => {
-                    lineIndex = 0;
-                    charIndex = 0;
-                }, 3000); // Wait 3s before restart
-            }
-
-            screenTexture.needsUpdate = true;
-        }
+    function resize() {
+        width = canvas.width = container.clientWidth;
+        height = canvas.height = container.clientHeight;
     }
 
-    // ANIMATION LOOP
-    function animate(time) {
-        requestAnimationFrame(animate);
+    resize();
+    window.addEventListener('resize', resize);
 
-        updateScreen(time);
+    mouse = { x: null, y: null };
+    container.style.pointerEvents = 'none';
 
-        // Subtle floating movement for the desk/camera feel
-        camera.position.x = Math.sin(time * 0.0005) * 0.5;
-        camera.position.y = 3 + Math.cos(time * 0.0005) * 0.2;
-        camera.lookAt(0, 0, 0);
-
-        // "Typing" motion for arms
-        if (lineIndex < codeLines.length) {
-            leftArm.position.y = 0.8 + Math.sin(time * 0.02) * 0.02;
-            rightArm.position.y = 0.8 + Math.cos(time * 0.02) * 0.02;
-        }
-
-        renderer.render(scene, camera);
-    }
-    animate(0);
-
-    // HANDLE RESIZE
-    window.addEventListener('resize', () => {
-        camera.aspect = container.clientWidth / container.clientHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(container.clientWidth, container.clientHeight);
+    document.addEventListener('mousemove', (e) => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
     });
+
+    class Particle {
+        constructor() {
+            this.x = Math.random() * width;
+            this.y = Math.random() * height;
+            this.size = Math.random() * 2 + 0.5;
+            this.speedX = (Math.random() - 0.5) * 0.5;
+            this.speedY = (Math.random() - 0.5) * 0.5;
+            this.opacity = Math.random() * 0.5 + 0.1;
+        }
+
+        update() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+
+            if (this.x < 0) this.x = width;
+            if (this.x > width) this.x = 0;
+            if (this.y < 0) this.y = height;
+            if (this.y > height) this.y = 0;
+
+            // Mouse interaction
+            if (mouse.x !== null) {
+                const dx = mouse.x - this.x;
+                const dy = mouse.y - this.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < 120) {
+                    this.x -= dx * 0.01;
+                    this.y -= dy * 0.01;
+                }
+            }
+        }
+
+        draw() {
+            const theme = document.documentElement.getAttribute('data-theme');
+            const color = theme === 'light' ? '108, 99, 255' : '108, 99, 255';
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(${color}, ${this.opacity})`;
+            ctx.fill();
+        }
+    }
+
+    // Create particles
+    const count = Math.min(Math.floor((width * height) / 8000), 120);
+    particles = [];
+    for (let i = 0; i < count; i++) {
+        particles.push(new Particle());
+    }
+
+    function connectParticles() {
+        const theme = document.documentElement.getAttribute('data-theme');
+        const lineColor = theme === 'light' ? '108, 99, 255' : '108, 99, 255';
+
+        for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+                const dx = particles[i].x - particles[j].x;
+                const dy = particles[i].y - particles[j].y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+
+                if (dist < 150) {
+                    const opacity = (1 - dist / 150) * 0.15;
+                    ctx.beginPath();
+                    ctx.strokeStyle = `rgba(${lineColor}, ${opacity})`;
+                    ctx.lineWidth = 0.5;
+                    ctx.moveTo(particles[i].x, particles[i].y);
+                    ctx.lineTo(particles[j].x, particles[j].y);
+                    ctx.stroke();
+                }
+            }
+        }
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, width, height);
+
+        particles.forEach(p => {
+            p.update();
+            p.draw();
+        });
+
+        connectParticles();
+        requestAnimationFrame(animate);
+    }
+
+    animate();
 }
